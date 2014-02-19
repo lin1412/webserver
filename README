@@ -1,0 +1,24 @@
+What works
+~~~~~~~~~~~~~~~~~~~~~~
+
+The webserver accepts both HTTP 1.0 and HTTP 1.1 requests and responds accordingly.
+Works for IPV6 also.
+The server deals with the required css, js and html files, other are treated as text files.
+Meminfo works and responds correctly
+Loadavg works and responds correctly.
+Runloop successfully runs and adjusts the load average.
+Allocanon successful allocates memory.
+Freeanon successful removes the last block given.
+Supports multiple client by threading. 
+Errors are caught so they won't shut down the server.
+
+Design
+==========================
+
+Our webserver is a 10 socket server.
+It uses mutexes to protect data during threading.
+The server waits for a connection then it creates a thread and calls the echo function.
+It is a robust implementation in that it will respond to both http 1.0 and http 1.1 
+requests given the correct header as well as safely handling bad requests. 
+It also handles binary files of mime type html, js, and css as described in the spec. 
+Other mime types are treated as txt.
